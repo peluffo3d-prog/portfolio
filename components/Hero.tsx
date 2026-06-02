@@ -1,232 +1,231 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
-import { useEffect, useState, memo } from "react";
-import { Check } from "lucide-react";
-import dynamic from "next/dynamic";
+import { useState } from "react";
+import { ArrowUpRight, X } from "lucide-react";
 
-const Galaxy = dynamic(() => import("./Galaxy"), { ssr: false });
+const ACCENT = "#5E0ED7";
+const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-// ─── Typewriter ────────────────────────────────────────────────────────────────
-function useTypewriter(text: string, speed = 44, startDelay = 750) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    setDisplayed(""); setDone(false);
-    let i = 0;
-    const t = setTimeout(() => {
-      const iv = setInterval(() => {
-        i++;
-        setDisplayed(text.slice(0, i));
-        if (i >= text.length) { clearInterval(iv); setDone(true); }
-      }, speed);
-      return () => clearInterval(iv);
-    }, startDelay);
-    return () => clearTimeout(t);
-  }, [text, speed, startDelay]);
-  return { displayed, done };
-}
+const fadeDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: EASE },
+  }),
+};
 
-// Componente separado para que sus re-renders no afecten el canvas
-const Headline = memo(function Headline() {
-  const { displayed, done } = useTypewriter("construyo software\ny agentes de IA.");
-  return (
-    <h1 className="text-5xl md:text-6xl lg:text-[76px] font-normal tracking-tight text-black leading-[1.08] mb-8 select-none w-full whitespace-pre-wrap">
-      {displayed}
-      {!done && (
-        <span className="inline-block w-[2px] h-[1.1em] bg-black align-middle ml-[2px] animate-blink" />
-      )}
-    </h1>
-  );
-});
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.12, duration: 0.6, ease: EASE },
+  }),
+};
 
-// ─── Pills ─────────────────────────────────────────────────────────────────────
-const SERVICIOS = ["Landing Page", "Bot WhatsApp", "Agente IA", "Otro"];
+const NAV_LINKS      = ["Story", "Expertise", "Studios", "Feedback"];
+const HEADING_WORDS  = ["Fearless", "Vision", "Delivered"];
+const STATS = [
+  { num: "300", label: "CRAFTED\nBRANDS" },
+  { num: "200", label: "DIGITAL\nPRODUCTS" },
+  { num: "100", label: "VENTURES\nFUNDED" },
+];
 
-const ServicePills = memo(function ServicePills() {
-  const [selected, setSelected] = useState<string[]>([]);
-  const toggle = (s: string) =>
-    setSelected((p) => (p.includes(s) ? p.filter((x) => x !== s) : [...p, s]));
+export default function Hero() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div>
-      <p className="text-2xl font-medium tracking-tight mb-2">¿Qué necesitás?</p>
-      <p className="text-[#738273] mb-6 text-base">Seleccioná lo que aplique</p>
+    <div
+      className="relative min-h-screen flex flex-col overflow-hidden"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
+      {/* ── VIDEO BACKGROUND ── */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260517_222138_3e3205be-3364-417b-a64a-bfe087acbec4.mp4" />
+      </video>
 
-      <div className="flex flex-wrap gap-3 mb-4">
-        {SERVICIOS.map((s) => {
-          const active = selected.includes(s);
-          return (
-            <button
-              key={s}
-              onClick={() => toggle(s)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-150 ${
-                active
-                  ? "bg-[#1C2E1E] text-white shadow-md"
-                  : "bg-white text-[#1C2E1E] border border-[#E8EAE8] hover:bg-[#F4F6F4]"
-              }`}
+      {/* ── CONTENT ── */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+
+        {/* ── NAV ── */}
+        <nav className="flex items-center justify-between px-5 sm:px-8 md:px-12 pt-5 md:pt-6">
+          {/* Logo */}
+          <motion.div
+            variants={fadeDown} initial="hidden" animate="visible" custom={0}
+            className="w-8 h-8 rounded-full border-2 flex items-center justify-center flex-shrink-0"
+            style={{ borderColor: ACCENT }}
+          >
+            <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
+          </motion.div>
+
+          {/* Center links — desktop only */}
+          <div className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map((link, i) => (
+              <motion.a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                variants={fadeDown} initial="hidden" animate="visible" custom={i + 1}
+                className="text-sm font-semibold tracking-widest uppercase text-black hover:opacity-60 transition-opacity"
+              >
+                {link}
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Hamburger */}
+          <motion.button
+            variants={fadeDown} initial="hidden" animate="visible" custom={5}
+            onClick={() => setMenuOpen(true)}
+            className="w-9 h-9 rounded-full bg-black flex flex-col items-center justify-center gap-1"
+            aria-label="Abrir menú"
+          >
+            <span className="w-4 h-0.5 bg-white" />
+            <span className="w-4 h-0.5 bg-white" />
+            <span className="w-4 h-0.5 bg-white" />
+          </motion.button>
+        </nav>
+
+        {/* ── STATS ROW ── */}
+        <div className="flex-1 flex items-center justify-end px-5 sm:px-8 md:px-12 py-8 md:py-0">
+          <div className="flex items-start gap-5 sm:gap-8 md:gap-10">
+            {STATS.map((stat, i) => (
+              <motion.div
+                key={stat.num}
+                variants={fadeUp} initial="hidden" animate="visible" custom={i + 2}
+                className="flex flex-col items-end text-right"
+              >
+                <div
+                  className="font-semibold text-black leading-none"
+                  style={{ fontSize: "clamp(1.5rem, 5vw, 3.5rem)", fontWeight: 600 }}
+                >
+                  <span style={{ fontSize: "0.5em", color: ACCENT }}>+</span>
+                  {stat.num}
+                </div>
+                <div className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black whitespace-pre-line leading-tight mt-1">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── BOTTOM ── */}
+        <div className="flex flex-col gap-6 md:gap-12 px-5 sm:px-8 md:px-12 pb-8 md:pb-12">
+
+          {/* Row A: tagline + CTA */}
+          <div className="flex items-center justify-between gap-4">
+            <motion.p
+              variants={fadeUp} initial="hidden" animate="visible" custom={5}
+              className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs"
             >
-              <AnimatePresence>
-                {active && (
-                  <motion.span
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                    className="flex items-center"
+              Shaping Bold /<br />Visions Into Power /<br />For Your Tribe
+            </motion.p>
+
+            <motion.a
+              href="#contacto"
+              variants={fadeUp} initial="hidden" animate="visible" custom={6}
+              className="flex items-center gap-1.5 font-semibold tracking-widest uppercase whitespace-nowrap text-base sm:text-xl md:text-2xl hover:opacity-70 transition-opacity"
+              style={{ color: ACCENT }}
+            >
+              Work With Us
+              <ArrowUpRight size={18} className="sm:hidden" />
+              <ArrowUpRight size={22} className="hidden sm:block" />
+            </motion.a>
+          </div>
+
+          {/* Row B: description + main heading */}
+          <div className="flex items-end justify-between gap-3 sm:gap-4">
+            <motion.div
+              variants={fadeUp} initial="hidden" animate="visible" custom={7}
+              className="w-[120px] sm:w-[180px] md:w-[280px] shrink-0"
+            >
+              <p className="text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black text-left md:text-right">
+                Creative Studios Built Around Elevating Your Vision Into Striking Reality
+              </p>
+            </motion.div>
+
+            {/* Heading words — clip reveal */}
+            <div className="text-right">
+              {HEADING_WORDS.map((word, i) => (
+                <div key={word} className="overflow-hidden">
+                  <motion.div
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{ delay: 0.4 + i * 0.14, duration: 0.7, ease: EASE }}
+                    className="font-semibold uppercase text-black"
+                    style={{ fontSize: "clamp(2rem, 9vw, 9rem)", lineHeight: 0.88, fontWeight: 600 }}
                   >
-                    <Check size={13} strokeWidth={2.5} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-              {s}
-            </button>
-          );
-        })}
+                    {word}
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        {selected.length === 0 ? (
-          <motion.p
-            key="vacio"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.45 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="text-xs italic text-neutral-500"
-          >
-            Seleccioná qué tipo de proyecto tenés en mente.
-          </motion.p>
-        ) : (
+      {/* ── MOBILE MENU OVERLAY ── */}
+      <AnimatePresence>
+        {menuOpen && (
           <motion.div
-            key="activo"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-50 bg-white flex flex-col px-5 sm:px-8 pt-5 pb-10"
           >
-            <div className="bg-[#FAFBF9] border border-[#EEF0EE] rounded-2xl px-5 py-4 flex items-center justify-between gap-4">
-              <span className="text-sm text-[#1C2E1E]">
-                Listo para hablar sobre: <strong>{selected.join(", ")}</strong>
-              </span>
+            {/* Top */}
+            <div className="flex items-center justify-between">
+              <div
+                className="w-8 h-8 rounded-full border-2 flex items-center justify-center"
+                style={{ borderColor: ACCENT }}
+              >
+                <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="w-9 h-9 rounded-full bg-black flex items-center justify-center"
+                aria-label="Cerrar menú"
+              >
+                <X size={16} color="white" />
+              </button>
+            </div>
+
+            {/* Links */}
+            <div className="flex flex-col gap-8 mt-16">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-3xl font-semibold tracking-widest uppercase text-black hover:opacity-60 transition-opacity"
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="mt-auto">
               <a
                 href="#contacto"
-                className="text-[#4D6D47] uppercase text-xs font-semibold tracking-wide hover:opacity-70 transition-opacity shrink-0"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2 text-xl font-semibold tracking-widest uppercase hover:opacity-70 transition-opacity"
+                style={{ color: ACCENT }}
               >
-                Arrancamos →
+                Work With Us
+                <ArrowUpRight size={22} />
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  );
-});
-
-// ─── Navbar ────────────────────────────────────────────────────────────────────
-const LINKS = [
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#servicios",  label: "Servicios" },
-  { href: "#contacto",   label: "Contacto" },
-];
-
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <header className="fixed top-0 inset-x-0 z-20 px-5 sm:px-8 py-4 sm:py-5 flex justify-between items-center">
-        <div className="flex items-center gap-2.5">
-          <span className="text-[20px] sm:text-[24px] tracking-tight text-black font-medium select-none">
-            Jasiel Nuevo
-          </span>
-          <span className="text-[20px] text-black select-none font-medium leading-none">✳</span>
-        </div>
-
-        <nav className="hidden md:flex text-[20px] text-black items-center">
-          {LINKS.map((l, i) => (
-            <span key={l.href} className="flex items-center">
-              <a href={l.href} className="hover:opacity-50 transition-opacity duration-150">{l.label}</a>
-              {i < LINKS.length - 1 && <span className="opacity-30">,&nbsp;</span>}
-            </span>
-          ))}
-        </nav>
-
-        <a href="#contacto" className="hidden md:block text-[20px] text-black underline underline-offset-2 hover:opacity-50 transition-opacity duration-150">
-          Hablemos
-        </a>
-
-        <button
-          onClick={() => setOpen((p) => !p)}
-          className="flex flex-col gap-[5px] md:hidden p-1"
-          aria-label="Menú"
-        >
-          <span className={`w-6 h-[2px] bg-black transition-all duration-300 ${open ? "rotate-45 translate-y-[7px]" : ""}`} />
-          <span className={`w-6 h-[2px] bg-black transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-          <span className={`w-6 h-[2px] bg-black transition-all duration-300 ${open ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-        </button>
-      </header>
-
-      <div className={`fixed inset-0 z-10 bg-white/96 backdrop-blur-sm transition-all duration-300 md:hidden flex flex-col items-center justify-center gap-8 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-        {LINKS.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-3xl hover:opacity-50 transition-opacity">
-            {l.label}
-          </a>
-        ))}
-        <a href="#contacto" onClick={() => setOpen(false)} className="text-3xl underline underline-offset-4 hover:opacity-50 transition-opacity">
-          Hablemos
-        </a>
-      </div>
-    </>
-  );
-}
-
-// ─── Hero principal ────────────────────────────────────────────────────────────
-export default function Hero() {
-  return (
-    <div className="relative bg-white text-neutral-900 font-sans selection:bg-[#EAECE9] selection:text-[#1C2E1E] antialiased overflow-x-hidden flex flex-col lg:block lg:min-h-screen">
-      <Navbar />
-
-      {/* Alien X galáctico — derecha en desktop, arriba en mobile */}
-      <div
-        className="order-last lg:order-none w-full h-[420px] md:h-[520px] lg:absolute lg:right-0 lg:top-0 lg:w-[52%] lg:h-full lg:z-0"
-        style={{ background: "#fff" }}
-      >
-        <Galaxy />
-      </div>
-
-      {/* Contenido */}
-      <div className="relative z-10 order-first lg:order-none w-full lg:min-h-screen flex flex-col">
-        <main className="w-full max-w-7xl mx-auto px-6 py-12 flex-1 flex flex-col justify-center">
-          <div className="pt-20 lg:pt-0 lg:max-w-[52%]">
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-            >
-              <Headline />
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.13 }}
-              className="text-lg md:text-xl text-[#5A635A] leading-relaxed font-normal mb-12"
-            >
-              Landings que convierten, bots de WhatsApp<br className="hidden sm:block" /> y agentes de IA para negocios en LATAM.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.24 }}
-            >
-              <ServicePills />
-            </motion.div>
-
-          </div>
-        </main>
-      </div>
     </div>
   );
 }
