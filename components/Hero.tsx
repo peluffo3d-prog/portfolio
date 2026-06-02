@@ -186,8 +186,11 @@ export default function Hero() {
     <div className="relative bg-white text-neutral-900 font-sans selection:bg-[#EAECE9] selection:text-[#1C2E1E] antialiased overflow-x-hidden flex flex-col lg:block lg:min-h-screen">
       <Navbar />
 
-      {/* Galaxy — derecha en desktop, arriba en mobile */}
-      <div className="order-last lg:order-none w-full h-72 md:h-96 lg:absolute lg:right-0 lg:top-0 lg:w-1/2 lg:h-full lg:z-0">
+      {/* Humanoide galáctico — derecha en desktop, arriba en mobile */}
+      <div
+        className="order-last lg:order-none w-full h-80 md:h-[420px] lg:absolute lg:right-0 lg:top-0 lg:w-1/2 lg:h-full lg:z-0"
+        style={{ background: "#ffffff" }}
+      >
         <Galaxy />
       </div>
 
