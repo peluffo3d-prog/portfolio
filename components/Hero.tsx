@@ -22,12 +22,12 @@ const fadeUp = {
   }),
 };
 
-const NAV_LINKS      = ["Story", "Expertise", "Studios", "Feedback"];
-const HEADING_WORDS  = ["Fearless", "Vision", "Delivered"];
+const NAV_LINKS      = ["Historia", "Proyectos", "Servicios", "Contacto"];
+const HEADING_WORDS  = ["Construyo.", "Con IA.", "Entrego."];
 const STATS = [
-  { num: "300", label: "CRAFTED\nBRANDS" },
-  { num: "200", label: "DIGITAL\nPRODUCTS" },
-  { num: "100", label: "VENTURES\nFUNDED" },
+  { num: "10", label: "PROYECTOS\nENTREGADOS" },
+  { num: "5",  label: "AGENTES\nDE IA" },
+  { num: "3",  label: "CLIENTES\nACTIVOS" },
 ];
 
 export default function Hero() {
@@ -58,10 +58,17 @@ export default function Hero() {
           {/* Logo */}
           <motion.div
             variants={fadeDown} initial="hidden" animate="visible" custom={0}
-            className="w-8 h-8 rounded-full border-2 flex items-center justify-center flex-shrink-0"
-            style={{ borderColor: ACCENT }}
+            className="flex items-center gap-3"
           >
-            <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
+            <div
+              className="w-8 h-8 rounded-full border-2 flex items-center justify-center flex-shrink-0"
+              style={{ borderColor: ACCENT }}
+            >
+              <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
+            </div>
+            <span className="hidden sm:block text-sm font-semibold tracking-widest uppercase text-black">
+              Jasiel Nuevo
+            </span>
           </motion.div>
 
           {/* Center links — desktop only */}
@@ -124,7 +131,7 @@ export default function Hero() {
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
               className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs"
             >
-              Shaping Bold /<br />Visions Into Power /<br />For Your Tribe
+              Software real /<br />Con IA /<br />Para LATAM
             </motion.p>
 
             <motion.a
@@ -133,7 +140,7 @@ export default function Hero() {
               className="flex items-center gap-1.5 font-semibold tracking-widest uppercase whitespace-nowrap text-base sm:text-xl md:text-2xl hover:opacity-70 transition-opacity"
               style={{ color: ACCENT }}
             >
-              Work With Us
+              Trabajemos juntos
               <ArrowUpRight size={18} className="sm:hidden" />
               <ArrowUpRight size={22} className="hidden sm:block" />
             </motion.a>
@@ -146,7 +153,7 @@ export default function Hero() {
               className="w-[120px] sm:w-[180px] md:w-[280px] shrink-0"
             >
               <p className="text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black text-left md:text-right">
-                Creative Studios Built Around Elevating Your Vision Into Striking Reality
+                Desarrollo software y agentes de IA que automatizan y hacen crecer tu negocio en LATAM
               </p>
             </motion.div>
 
@@ -219,7 +226,7 @@ export default function Hero() {
                 className="flex items-center gap-2 text-xl font-semibold tracking-widest uppercase hover:opacity-70 transition-opacity"
                 style={{ color: ACCENT }}
               >
-                Work With Us
+                Trabajemos juntos
                 <ArrowUpRight size={22} />
               </a>
             </div>
