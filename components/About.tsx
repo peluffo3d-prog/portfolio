@@ -7,8 +7,8 @@ const ACCENT = "#5E0ED7";
 
 const HITOS = [
   { num: "+1K",  label: "USUARIOS\nATLASLIBRE" },
-  { num: "600+", label: "ESTRUCTURAS\nANATÓMICAS" },
-  { num: "4",    label: "APPS EN\nPRODUCCIÓN" },
+  { num: "5+",   label: "APPS EN\nPRODUCCIÓN" },
+  { num: "600+", label: "ESTRUCTURAS\nANATÓMICAS 3D" },
 ];
 
 export default function About() {
@@ -68,10 +68,10 @@ export default function About() {
         >
           <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase leading-loose"
             style={{ color: "rgba(0,0,0,0.50)" }}>
-            Mi proyecto más grande es AtlasLibre — un atlas anatómico 3D
-            gratuito para estudiantes de medicina de toda Latinoamérica.
-            Empecé con Instala y Viaja, seguí con Caja Clara,
-            y no paré desde entonces.
+            Mi proyecto más destacado es AtlasLibre — atlas anatómico 3D
+            gratuito para estudiantes de medicina de LATAM, con +1K usuarios.
+            Empecé con Instala y Viaja, construí Caja Clara, Automotores DEH
+            con subastas en tiempo real, y no paré desde entonces.
           </p>
         </motion.div>
       </div>

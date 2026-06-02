@@ -6,16 +6,22 @@ export const projects = [
     link: "https://atlaslibre.vercel.app",
   },
   {
-    title: "Kiosco POS",
-    description: "Sistema de punto de venta SaaS multi-tenant para kioscos. Stock, ventas, cierre de caja e historial en tiempo real.",
+    title: "Automotores DEH",
+    description: "Plataforma web completa para concesionaria. Catálogo de autos con páginas individuales, sistema de subastas en tiempo real, panel admin, financiación y contacto por WhatsApp.",
+    tags: ["Next.js", "Supabase", "Subastas"],
+    link: "https://github.com/peluffo3d-prog/damian-deploy",
+  },
+  {
+    title: "Caja Clara",
+    description: "SaaS multi-tenant de punto de venta para kioscos. Stock, ventas, cierre de caja e historial. Cada kiosco tiene su propio panel aislado.",
     tags: ["Next.js", "Supabase", "SaaS"],
-    link: "#",
+    link: "https://github.com/peluffo3d-prog/CAJA-CLARA",
   },
   {
     title: "Bot WhatsApp",
-    description: "Bot de atención al cliente configurable para cualquier negocio. Responde 24/7, califica leads y deriva a humanos. Deployado en Pelufo3D y otros.",
+    description: "Bot de atención al cliente configurable por JSON para cualquier negocio. Responde 24/7, califica leads y deriva a humanos. Deployado en Pelufo3D y otros.",
     tags: ["WhatsApp API", "Node.js", "Automatización"],
-    link: "#",
+    link: "https://github.com/peluffo3d-prog/bot-whatsapp-generico",
   },
   {
     title: "Diseños JK",
@@ -27,14 +33,14 @@ export const projects = [
 
 export const services = [
   {
-    name: "Landing Page MVP",
-    price: "USD 200–300",
+    name: "Landing Page",
+    price: "DESDE USD 200",
     description: "Una página diseñada para convertir visitas en clientes. Formulario de contacto, catálogo y deploy incluido.",
     includes: ["Diseño mobile-first", "Deploy en producción", "3 cambios incluidos"],
   },
   {
     name: "Bot WhatsApp",
-    price: "USD 150–250",
+    price: "DESDE USD 150",
     description: "Automizá las consultas de tu negocio. El bot responde 24/7, califica leads y los manda a tu equipo.",
     includes: ["Flujo personalizado", "Integración con catálogo", "1 mes de soporte"],
   },
