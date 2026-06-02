@@ -7,17 +7,19 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <div style={{ borderTop: "1px solid var(--border)" }} />
       <Projects />
-      <div style={{ borderTop: "1px solid var(--border)" }} />
       <Services />
-      <div style={{ borderTop: "1px solid var(--border)" }} />
       <Chat />
       <footer
-        className="px-6 md:px-16 py-8 text-xs text-center"
-        style={{ borderTop: "1px solid var(--border)", color: "var(--muted)" }}
+        style={{ fontFamily: "'Inter', sans-serif", background: "#060606", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        className="px-5 sm:px-8 md:px-12 py-8 flex items-center justify-between"
       >
-        Jasiel Nuevo · Buenos Aires · {new Date().getFullYear()}
+        <span className="text-[9px] font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>
+          Jasiel · Buenos Aires · {new Date().getFullYear()}
+        </span>
+        <span className="text-[9px] font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>
+          Desarrollador de Software & IA
+        </span>
       </footer>
     </main>
   );

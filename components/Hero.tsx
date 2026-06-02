@@ -23,7 +23,7 @@ const fadeUp = {
 };
 
 const NAV_LINKS      = ["Historia", "Proyectos", "Servicios", "Contacto"];
-const HEADING_WORDS  = ["Construyo.", "Con IA.", "Entrego."];
+const HEADING_WORDS  = ["Construyo", "Ideas."];
 const STATS = [
   { num: "10", label: "PROYECTOS\nENTREGADOS" },
   { num: "5",  label: "AGENTES\nDE IA" },
@@ -67,7 +67,7 @@ export default function Hero() {
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
             </div>
             <span className="hidden sm:block text-sm font-semibold tracking-widest uppercase text-black">
-              Jasiel Nuevo
+              Jasiel
             </span>
           </motion.div>
 
