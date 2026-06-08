@@ -152,7 +152,7 @@ export default function Hero() {
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
               className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs"
             >
-              Jasiel & Peluffo /<br />Software & IA /<br />Buenos Aires
+              Jasiel & Javier /<br />Software & IA /<br />Buenos Aires
             </motion.p>
 
             <motion.a
