@@ -97,7 +97,7 @@ export default function Chat() {
         className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-12"
         style={{ color: "rgba(255,255,255,0.35)" }}
       >
-        Chateá con mi IA — responde como yo, con mi info real.
+        Chateá con nuestra IA — responde con info real del estudio.
       </motion.p>
 
       <motion.div
@@ -113,9 +113,9 @@ export default function Chat() {
           {messages.length === 0 && (
             <div className="flex gap-3 items-start">
               <div className="w-6 h-6 rounded-full border flex items-center justify-center text-[9px] font-semibold shrink-0 mt-0.5"
-                style={{ borderColor: ACCENT, color: ACCENT }}>J</div>
+                style={{ borderColor: ACCENT, color: ACCENT }}>P</div>
               <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
-                Hola, soy Jasiel. ¿En qué te puedo ayudar?
+                Hola, somos PeluffoStudio. ¿En qué te podemos ayudar?
               </p>
             </div>
           )}
@@ -134,7 +134,7 @@ export default function Chat() {
                     borderColor: m.role === "user" ? "rgba(255,255,255,0.25)" : ACCENT,
                     color:       m.role === "user" ? "rgba(255,255,255,0.6)"  : ACCENT,
                   }}>
-                  {m.role === "user" ? "V" : "J"}
+                  {m.role === "user" ? "V" : "P"}
                 </div>
                 {/* Mensajes: texto normal, NO uppercase */}
                 <p className="text-sm leading-relaxed max-w-xs"

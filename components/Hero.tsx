@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowUpRight, X } from "lucide-react";
 
 const ACCENT = "#5E0ED7";
@@ -23,7 +23,7 @@ const fadeUp = {
 };
 
 const NAV_LINKS      = ["Historia", "Proyectos", "Servicios", "Contacto"];
-const HEADING_WORDS  = ["Socios de", "Crecimiento."];
+const HEADING_WORDS  = ["Construimos", "Ideas."];
 const STATS = [
   { num: "6",  label: "PROYECTOS\nENTREGADOS" },
   { num: "2",  label: "AGENTES\nDE IA" },
@@ -32,6 +32,15 @@ const STATS = [
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [availMonth, setAvailMonth] = useState("junio 2026");
+
+  useEffect(() => {
+    // Auto-actualiza cada vez que se carga la página
+    const d = new Date();
+    const mes  = d.toLocaleDateString("es-AR", { month: "long" });
+    const año  = d.getFullYear();
+    setAvailMonth(`${mes} ${año}`);
+  }, []);
 
   return (
     <div
@@ -85,9 +94,21 @@ export default function Hero() {
             ))}
           </div>
 
+          {/* Badge disponibilidad — desktop */}
+          <motion.div
+            variants={fadeDown} initial="hidden" animate="visible" custom={5}
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border"
+            style={{ borderColor: "rgba(0,0,0,0.15)", background: "rgba(255,255,255,0.7)", backdropFilter: "blur(8px)" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#22c55e" }} />
+            <span className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: "#1a1a1a" }}>
+              Disponibles · {availMonth}
+            </span>
+          </motion.div>
+
           {/* Hamburger */}
           <motion.button
-            variants={fadeDown} initial="hidden" animate="visible" custom={5}
+            variants={fadeDown} initial="hidden" animate="visible" custom={6}
             onClick={() => setMenuOpen(true)}
             className="w-9 h-9 rounded-full bg-black flex flex-col items-center justify-center gap-1"
             aria-label="Abrir menú"
@@ -131,7 +152,7 @@ export default function Hero() {
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
               className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs"
             >
-              Agencia /<br />Software & IA /<br />Para LATAM
+              Jasiel & Peluffo /<br />Software & IA /<br />Buenos Aires
             </motion.p>
 
             <motion.a

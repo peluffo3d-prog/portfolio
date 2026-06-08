@@ -7,20 +7,20 @@ const ACCENT = "#5E0ED7";
 
 const STACK = [
   {
-    area: "Frontend",
-    items: ["Next.js", "React", "Three.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    area: "Producto Digital",
+    items: ["Apps web", "MVPs funcionales", "Landing pages", "Plataformas SaaS", "E-commerce"],
   },
   {
-    area: "Backend & DB",
-    items: ["Node.js", "Supabase", "PostgreSQL", "API REST"],
+    area: "IA & Automatización",
+    items: ["Agentes IA", "Bots WhatsApp", "Flujos automáticos", "Atención 24/7", "Integraciones"],
   },
   {
-    area: "IA & Agentes",
-    items: ["Claude API", "Groq API", "WhatsApp API", "Prompt Engineering"],
+    area: "Negocio",
+    items: ["Validación de ideas", "Go-to-market", "Monetización", "Operaciones", "Estrategia"],
   },
   {
-    area: "Deploy",
-    items: ["Vercel", "GitHub", "GitHub Pages"],
+    area: "Fabricación",
+    items: ["Impresión 3D", "Diseño de producto", "Prototipos", "E-commerce físico", "Retail"],
   },
 ];
 
@@ -42,7 +42,7 @@ export default function Stack() {
         className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-5"
         style={{ color: ACCENT }}
       >
-        — Stack
+        — Capacidades
       </motion.p>
 
       <div className="overflow-hidden mb-14 md:mb-20">
@@ -53,7 +53,7 @@ export default function Stack() {
           className="font-semibold uppercase"
           style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.88, fontWeight: 600 }}
         >
-          Tecnologías.
+          Capacidades.
         </motion.h2>
       </div>
 

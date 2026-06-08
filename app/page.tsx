@@ -30,7 +30,7 @@ export default function Home() {
           className="text-[9px] font-semibold tracking-widest uppercase"
           style={{ color: "rgba(255,255,255,0.22)" }}
         >
-          Jasiel · Buenos Aires · {new Date().getFullYear()}
+          PeluffoStudio · Buenos Aires · {new Date().getFullYear()}
         </span>
 
         <div className="flex items-center gap-6">

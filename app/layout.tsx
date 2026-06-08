@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jasiel Nuevo — Dev & IA para LATAM",
-  description: "Construyo software y agentes de IA para negocios en LATAM. Landings, bots de WhatsApp y automatizaciones.",
+  title: "PeluffoStudio — Agencia de Software & IA para LATAM",
+  description: "Construimos software y agentes de IA para negocios en LATAM. Somos tus socios de crecimiento.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

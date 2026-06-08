@@ -7,8 +7,21 @@ const ACCENT = "#5E0ED7";
 
 const HITOS = [
   { num: "+1K",  label: "USUARIOS\nATLASLIBRE" },
-  { num: "5+",   label: "APPS EN\nPRODUCCIÓN" },
-  { num: "600+", label: "ESTRUCTURAS\nANATÓMICAS 3D" },
+  { num: "6",    label: "APPS EN\nPRODUCCIÓN" },
+  { num: "3",    label: "CLIENTES\nACTIVOS" },
+];
+
+const SOCIOS = [
+  {
+    nombre: "Jasiel",
+    rol: "Dev & IA",
+    bio: "Construyo las apps, los agentes y la infraestructura. Me interesa que las cosas funcionen de verdad, no solo en demo. Fui de aprender a programar solo a tener proyectos con miles de usuarios en menos de un año.",
+  },
+  {
+    nombre: "Peluffo",
+    rol: "Ecommerce & Operaciones",
+    bio: "Gestiono Pelufo3D, nuestro taller de impresión 3D. Sé lo que necesitan los negocios reales porque tengo uno. Ese conocimiento operativo es lo que hace que lo que construimos tenga sentido para quien lo usa.",
+  },
 ];
 
 export default function About() {
@@ -30,10 +43,10 @@ export default function About() {
         className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-5"
         style={{ color: ACCENT }}
       >
-        — Historia
+        — Quiénes somos
       </motion.p>
 
-      {/* Heading slide-up */}
+      {/* Heading */}
       <div className="overflow-hidden mb-12 md:mb-20">
         <motion.h2
           initial={{ y: "110%" }}
@@ -42,45 +55,63 @@ export default function About() {
           className="font-semibold uppercase text-black"
           style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.88, fontWeight: 600 }}
         >
-          Del código al impacto.
+          Dos personas.<br />Una visión.
         </motion.h2>
       </div>
 
-      {/* Bio en dos columnas */}
-      <div className="grid md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.18 }}
-        >
-          <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase leading-loose"
-            style={{ color: "rgba(0,0,0,0.50)" }}>
-            Soy Jasiel, desarrollador de software de Buenos Aires.
-            Construyo apps, bots y agentes de IA para negocios en LATAM.
-            Me apoyé en la IA para escalar lo que uno solo no puede.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.26 }}
-        >
-          <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase leading-loose"
-            style={{ color: "rgba(0,0,0,0.50)" }}>
-            Mi proyecto más destacado es AtlasLibre — atlas anatómico 3D
-            gratuito para estudiantes de medicina de LATAM, con +1K usuarios.
-            Empecé con Instala y Viaja, construí Caja Clara, Automotores DEH
-            con subastas en tiempo real, y no paré desde entonces.
-          </p>
-        </motion.div>
+      {/* Cards de socios */}
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-16 md:mb-24">
+        {SOCIOS.map((s, i) => (
+          <motion.div
+            key={s.nombre}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.18 + i * 0.1 }}
+            className="border border-black/10 p-7 md:p-8"
+            style={{ borderRadius: "4px" }}
+          >
+            <div className="flex items-baseline gap-3 mb-5">
+              <span
+                className="font-semibold uppercase"
+                style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 700, lineHeight: 1 }}
+              >
+                {s.nombre}
+              </span>
+              <span
+                className="text-[10px] font-semibold tracking-widest uppercase px-2 py-1"
+                style={{ background: "rgba(94,14,215,0.08)", color: ACCENT, borderRadius: "2px" }}
+              >
+                {s.rol}
+              </span>
+            </div>
+            <p
+              className="text-xs sm:text-sm font-medium leading-loose"
+              style={{ color: "rgba(0,0,0,0.55)" }}
+            >
+              {s.bio}
+            </p>
+          </motion.div>
+        ))}
       </div>
 
-      {/* Stats row */}
+      {/* Frase puente */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.38 }}
+        className="text-xs sm:text-sm font-semibold tracking-widest uppercase leading-loose mb-16 md:mb-20 max-w-2xl"
+        style={{ color: "rgba(0,0,0,0.45)" }}
+      >
+        Juntos cubrimos desde el código hasta las operaciones. No somos una agencia grande —
+        somos dos personas que construyen cosas reales para negocios reales en LATAM.
+        AtlasLibre, Pelufo3D, Diseños JK, Laser Cut Designe. Todos en producción.
+      </motion.p>
+
+      {/* Stats */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: EASE, delay: 0.34 }}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.44 }}
         className="flex flex-wrap gap-x-10 gap-y-8 pt-10 border-t border-black/10"
       >
         {HITOS.map(h => (
@@ -89,9 +120,7 @@ export default function About() {
               className="font-semibold"
               style={{ fontSize: "clamp(1.8rem, 5vw, 3.2rem)", fontWeight: 600, lineHeight: 1 }}
             >
-              <span style={{ fontSize: "0.55em", color: ACCENT, marginRight: "1px" }}>
-                {h.num.startsWith("+") || h.num.endsWith("+") ? "" : "+"}
-              </span>
+              <span style={{ fontSize: "0.55em", color: ACCENT, marginRight: "1px" }}>+</span>
               {h.num}
             </span>
             <span
@@ -102,8 +131,6 @@ export default function About() {
             </span>
           </div>
         ))}
-
-        {/* AtlasLibre highlight */}
         <div className="ml-auto flex items-end">
           <a
             href="https://atlaslibre.vercel.app"

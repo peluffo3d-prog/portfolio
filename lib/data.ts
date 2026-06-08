@@ -1,39 +1,45 @@
 export const projects = [
   {
+    title: "Diseños JK",
+    description: "Landing para fabricante de puertas corredizas a medida en GBA. Configurador de cotización en vivo — ambiente, tipo, material y medidas, precio al instante. Sección B2B con descuentos por volumen para carpinteros y revendedores. Video de fábrica de fondo, panel sticky, checkout con MercadoPago.",
+    tags: ["Next.js", "MercadoPago", "Supabase", "Landing"],
+    link: "https://disenosjk.vercel.app",
+    image: "https://image.thum.io/get/width/1200/https://disenosjk.vercel.app",
+  },
+  {
     title: "AtlasLibre",
     description: "Atlas anatómico 3D interactivo y gratuito para estudiantes de medicina en LATAM. +1.000 usuarios. Netter cuesta USD 100 — AtlasLibre cuesta $0.",
     tags: ["Next.js", "Three.js", "Supabase", "IA"],
     link: "https://atlaslibre.vercel.app",
-  },
-  {
-    title: "Automotores DEH",
-    description: "Plataforma web completa para concesionaria. Catálogo de autos con páginas individuales, sistema de subastas en tiempo real, panel admin, financiación y contacto por WhatsApp.",
-    tags: ["Next.js", "Supabase", "Subastas"],
-    link: "https://github.com/peluffo3d-prog/damian-deploy",
-  },
-  {
-    title: "Caja Clara",
-    description: "SaaS multi-tenant de punto de venta para kioscos. Stock, ventas, cierre de caja e historial. Cada kiosco tiene su propio panel aislado.",
-    tags: ["Next.js", "Supabase", "SaaS"],
-    link: "https://github.com/peluffo3d-prog/CAJA-CLARA",
-  },
-  {
-    title: "Diseños JK",
-    description: "Landing para fabricante de puertas corredizas a medida en GBA. Configurador de cotización en vivo — elegís ambiente, tipo, material y medidas, el precio aparece al instante. Sección B2B con tabla de descuentos por volumen para carpinteros y revendedores. Intro animada, video de fábrica de fondo, panel resumen sticky y checkout con MercadoPago.",
-    tags: ["Next.js", "MercadoPago", "Supabase", "Landing"],
-    link: "https://disenosjk.vercel.app",
+    image: "https://image.thum.io/get/width/1200/https://atlaslibre.vercel.app",
   },
   {
     title: "Laser Cut Designe",
-    description: "Landing oscura para taller de corte láser en Villa Luzuriaga, GBA. Video del proceso de corte con mix-blend-mode:screen de fondo, animaciones reveal por clip-path, guía de materiales interactiva y formulario de pedido. Diseño industrial, tipografía display, cero frameworks CSS.",
+    description: "Landing oscura para taller de corte láser en Villa Luzuriaga. Video del proceso de corte con mix-blend-mode:screen, animaciones reveal, guía de materiales. Single-file, cero dependencias.",
     tags: ["HTML", "CSS", "Canvas", "Landing"],
     link: "https://laser-cut-designe.vercel.app",
+    image: "https://image.thum.io/get/width/1200/https://laser-cut-designe.vercel.app",
   },
   {
-    title: "Bot WhatsApp",
-    description: "Bot de atención al cliente configurable por JSON para cualquier negocio. Responde 24/7, califica leads y deriva a humanos. Deployado en Pelufo3D y otros.",
-    tags: ["WhatsApp API", "Node.js", "Automatización"],
-    link: "https://github.com/peluffo3d-prog/bot-whatsapp-generico",
+    title: "Pelufo3D",
+    description: "Taller de impresión 3D y tienda online de Peluffo. Soportes gaming, organizadores y accesorios de escritorio fabricados a pedido. Bot de WhatsApp propio para atención 24/7 integrado a la tienda.",
+    tags: ["Ecommerce", "WhatsApp Bot", "3D Print"],
+    link: "https://github.com/peluffo3d-prog",
+    image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=1200&q=80",
+  },
+  {
+    title: "Automotores DEH",
+    description: "Plataforma web completa para concesionaria. Catálogo, subastas en tiempo real, panel admin y financiación. Cada auto tiene su propia página con ficha técnica.",
+    tags: ["Next.js", "Supabase", "Subastas"],
+    link: "https://github.com/peluffo3d-prog/damian-deploy",
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=80",
+  },
+  {
+    title: "Caja Clara",
+    description: "SaaS multi-tenant de punto de venta para kioscos. Stock, ventas, cierre de caja e historial. Cada kiosco tiene su propio panel aislado sin tocar datos ajenos.",
+    tags: ["Next.js", "Supabase", "SaaS"],
+    link: "https://github.com/peluffo3d-prog/CAJA-CLARA",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
   },
 ];
 
