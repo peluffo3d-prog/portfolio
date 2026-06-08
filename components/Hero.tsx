@@ -147,7 +147,7 @@ export default function Hero() {
         </nav>
 
         {/* ── STATS ROW ── */}
-        <div className="flex-1 flex items-center justify-end px-5 sm:px-8 md:px-12 py-8 md:py-0">
+        <div className="flex-1 flex items-center justify-end px-5 sm:px-8 md:px-12 pt-10 md:pt-0 pb-4 md:pb-0">
           <div className="flex items-start gap-5 sm:gap-8 md:gap-10">
             {STATS.map((stat, i) => (
               <motion.div
@@ -157,12 +157,12 @@ export default function Hero() {
               >
                 <div
                   className="font-semibold text-black leading-none"
-                  style={{ fontSize: "clamp(1.5rem, 5vw, 3.5rem)", fontWeight: 600 }}
+                  style={{ fontSize: "clamp(1.2rem, 3.5vw, 2.8rem)", fontWeight: 600 }}
                 >
                   <span style={{ fontSize: "0.5em", color: ACCENT }}>+</span>
                   <StatNumber target={parseInt(stat.num)} delay={800 + i * 150} />
                 </div>
-                <div className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black whitespace-pre-line leading-tight mt-1">
+                <div className="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-widest uppercase text-black whitespace-pre-line leading-tight mt-1">
                   {stat.label}
                 </div>
               </motion.div>
@@ -171,13 +171,30 @@ export default function Hero() {
         </div>
 
         {/* ── BOTTOM ── */}
-        <div className="flex flex-col gap-6 md:gap-12 px-5 sm:px-8 md:px-12 pb-8 md:pb-12">
+        <div className="px-5 sm:px-8 md:px-12 pb-7 md:pb-12">
 
-          {/* Row A: tagline + CTA */}
+          {/* Heading — full width, tamaño controlado */}
+          <div className="mb-5 md:mb-8">
+            {HEADING_WORDS.map((word, i) => (
+              <div key={word} className="overflow-hidden">
+                <motion.div
+                  initial={{ y: "110%" }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.4 + i * 0.14, duration: 0.7, ease: EASE }}
+                  className="font-semibold uppercase text-black text-right"
+                  style={{ fontSize: "clamp(2.2rem, 6.5vw, 6.5rem)", lineHeight: 0.9, fontWeight: 600 }}
+                >
+                  {word}
+                </motion.div>
+              </div>
+            ))}
+          </div>
+
+          {/* Row: tagline + CTA — debajo del heading */}
           <div className="flex items-center justify-between gap-4">
             <motion.p
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
-              className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs"
+              className="text-[9px] sm:text-xs font-semibold tracking-widest uppercase text-black max-w-[160px] sm:max-w-[220px] md:max-w-xs leading-relaxed"
             >
               Jasiel & Javier /<br />Software & IA /<br />Buenos Aires
             </motion.p>
@@ -185,42 +202,13 @@ export default function Hero() {
             <motion.a
               href="#contacto"
               variants={fadeUp} initial="hidden" animate="visible" custom={6}
-              className="flex items-center gap-1.5 font-semibold tracking-widest uppercase whitespace-nowrap text-base sm:text-xl md:text-2xl hover:opacity-70 transition-opacity"
+              className="flex items-center gap-1.5 font-semibold tracking-widest uppercase whitespace-nowrap text-sm sm:text-lg md:text-2xl hover:opacity-70 transition-opacity"
               style={{ color: ACCENT }}
             >
               Trabajemos juntos
-              <ArrowUpRight size={18} className="sm:hidden" />
-              <ArrowUpRight size={22} className="hidden sm:block" />
+              <ArrowUpRight size={16} className="sm:hidden" />
+              <ArrowUpRight size={20} className="hidden sm:block" />
             </motion.a>
-          </div>
-
-          {/* Row B: description + main heading */}
-          <div className="flex items-end justify-between gap-3 sm:gap-4">
-            <motion.div
-              variants={fadeUp} initial="hidden" animate="visible" custom={7}
-              className="w-[120px] sm:w-[180px] md:w-[280px] shrink-0"
-            >
-              <p className="text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black text-left md:text-right">
-                Construimos software y agentes de IA que automatizan y hacen crecer tu negocio en LATAM
-              </p>
-            </motion.div>
-
-            {/* Heading words — clip reveal */}
-            <div className="text-right">
-              {HEADING_WORDS.map((word, i) => (
-                <div key={word} className="overflow-hidden">
-                  <motion.div
-                    initial={{ y: "110%" }}
-                    animate={{ y: 0 }}
-                    transition={{ delay: 0.4 + i * 0.14, duration: 0.7, ease: EASE }}
-                    className="font-semibold uppercase text-black"
-                    style={{ fontSize: "clamp(2rem, 9vw, 9rem)", lineHeight: 0.88, fontWeight: 600 }}
-                  >
-                    {word}
-                  </motion.div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
