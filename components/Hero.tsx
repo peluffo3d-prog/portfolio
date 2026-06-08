@@ -23,10 +23,10 @@ const fadeUp = {
 };
 
 const NAV_LINKS      = ["Historia", "Proyectos", "Servicios", "Contacto"];
-const HEADING_WORDS  = ["Construyo", "Ideas."];
+const HEADING_WORDS  = ["Socios de", "Crecimiento."];
 const STATS = [
-  { num: "10", label: "PROYECTOS\nENTREGADOS" },
-  { num: "5",  label: "AGENTES\nDE IA" },
+  { num: "6",  label: "PROYECTOS\nENTREGADOS" },
+  { num: "2",  label: "AGENTES\nDE IA" },
   { num: "3",  label: "CLIENTES\nACTIVOS" },
 ];
 
@@ -67,7 +67,7 @@ export default function Hero() {
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
             </div>
             <span className="hidden sm:block text-sm font-semibold tracking-widest uppercase text-black">
-              Jasiel
+              PeluffoStudio
             </span>
           </motion.div>
 
@@ -131,7 +131,7 @@ export default function Hero() {
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
               className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs"
             >
-              Software real /<br />Con IA /<br />Para LATAM
+              Agencia /<br />Software & IA /<br />Para LATAM
             </motion.p>
 
             <motion.a
@@ -153,7 +153,7 @@ export default function Hero() {
               className="w-[120px] sm:w-[180px] md:w-[280px] shrink-0"
             >
               <p className="text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black text-left md:text-right">
-                Desarrollo software y agentes de IA que automatizan y hacen crecer tu negocio en LATAM
+                Construimos software y agentes de IA que automatizan y hacen crecer tu negocio en LATAM
               </p>
             </motion.div>
 
