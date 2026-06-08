@@ -1,7 +1,29 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, X } from "lucide-react";
+
+function useCountUp(target: number, duration = 1600, startDelay = 600) {
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    const timer = setTimeout(() => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        // ease-out quart
+        const eased = 1 - Math.pow(1 - progress, 4);
+        setCount(Math.round(eased * target));
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, startDelay);
+    return () => clearTimeout(timer);
+  }, [target, duration, startDelay]);
+  return count;
+}
 
 const ACCENT = "#5E0ED7";
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -21,6 +43,11 @@ const fadeUp = {
     transition: { delay: i * 0.12, duration: 0.6, ease: EASE },
   }),
 };
+
+function StatNumber({ target, delay }: { target: number; delay: number }) {
+  const val = useCountUp(target, 1500, delay);
+  return <>{val}</>;
+}
 
 const NAV_LINKS      = ["Historia", "Proyectos", "Servicios", "Contacto"];
 const HEADING_WORDS  = ["Construimos", "Ideas."];
@@ -133,7 +160,7 @@ export default function Hero() {
                   style={{ fontSize: "clamp(1.5rem, 5vw, 3.5rem)", fontWeight: 600 }}
                 >
                   <span style={{ fontSize: "0.5em", color: ACCENT }}>+</span>
-                  {stat.num}
+                  <StatNumber target={parseInt(stat.num)} delay={800 + i * 150} />
                 </div>
                 <div className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black whitespace-pre-line leading-tight mt-1">
                   {stat.label}
