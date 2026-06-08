@@ -15,12 +15,12 @@ const SOCIOS = [
   {
     nombre: "Jasiel",
     rol: "Dev & IA",
-    bio: "Construyo las apps, los agentes y la infraestructura. Me interesa que las cosas funcionen de verdad, no solo en demo. Fui de aprender a programar solo a tener proyectos con miles de usuarios en menos de un año.",
+    bio: "Construyo las apps, los agentes y la infraestructura. De aprender solo a tener proyectos con miles de usuarios en menos de un año. Traigo el lado técnico más el ojo para el producto.",
   },
   {
-    nombre: "Peluffo",
-    rol: "Ecommerce & Operaciones",
-    bio: "Gestiono Pelufo3D, nuestro taller de impresión 3D. Sé lo que necesitan los negocios reales porque tengo uno. Ese conocimiento operativo es lo que hace que lo que construimos tenga sentido para quien lo usa.",
+    nombre: "Javier",
+    rol: "Producto & Negocios",
+    bio: "Mi socio y amigo desde chicos. Javier lleva Pelufo3D, nuestro taller de impresión 3D, así que sabe lo que necesitan los negocios reales porque tiene uno. Mismo nivel de experiencia, mismos softskills — dos cabezas pensando cada proyecto.",
   },
 ];
 
@@ -102,8 +102,9 @@ export default function About() {
         className="text-xs sm:text-sm font-semibold tracking-widest uppercase leading-loose mb-16 md:mb-20 max-w-2xl"
         style={{ color: "rgba(0,0,0,0.45)" }}
       >
-        Juntos cubrimos desde el código hasta las operaciones. No somos una agencia grande —
-        somos dos personas que construyen cosas reales para negocios reales en LATAM.
+        Dos amigos de la infancia con el mismo nivel técnico, la misma experiencia en negocios
+        y un paquete completo de softskills para implementar en cualquier proyecto.
+        No somos una agencia — somos dos personas que construyen cosas reales.
         AtlasLibre, Pelufo3D, Diseños JK, Laser Cut Designe. Todos en producción.
       </motion.p>
 

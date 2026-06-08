@@ -1,17 +1,17 @@
 export const projects = [
   {
+    title: "AtlasLibre",
+    description: "Atlas anatómico 3D interactivo y gratuito para estudiantes de medicina en LATAM. +1.000 usuarios. Netter cuesta USD 100 — AtlasLibre cuesta $0.",
+    tags: ["Next.js", "Three.js", "Supabase", "IA"],
+    link: "https://atlaslibre.app",
+    image: "https://image.thum.io/get/width/1200/https://atlaslibre.app",
+  },
+  {
     title: "Diseños JK",
     description: "Landing para fabricante de puertas corredizas a medida en GBA. Configurador de cotización en vivo — ambiente, tipo, material y medidas, precio al instante. Sección B2B con descuentos por volumen para carpinteros y revendedores. Video de fábrica de fondo, panel sticky, checkout con MercadoPago.",
     tags: ["Next.js", "MercadoPago", "Supabase", "Landing"],
     link: "https://disenosjk.vercel.app",
     image: "https://image.thum.io/get/width/1200/https://disenosjk.vercel.app",
-  },
-  {
-    title: "AtlasLibre",
-    description: "Atlas anatómico 3D interactivo y gratuito para estudiantes de medicina en LATAM. +1.000 usuarios. Netter cuesta USD 100 — AtlasLibre cuesta $0.",
-    tags: ["Next.js", "Three.js", "Supabase", "IA"],
-    link: "https://atlaslibre.vercel.app",
-    image: "https://image.thum.io/get/width/1200/https://atlaslibre.vercel.app",
   },
   {
     title: "Laser Cut Designe",
@@ -78,7 +78,7 @@ PERSONALIDAD:
 
 PROYECTOS:
 
-AtlasLibre (atlaslibre.vercel.app):
+AtlasLibre (atlaslibre.app):
 - Atlas anatómico 3D interactivo, gratuito y open source para estudiantes de medicina en LATAM.
 - Por qué existe: Netter cuesta USD 100. En Argentina son 2-3 salarios mínimos. AtlasLibre es $0.
 - +1.000 usuarios activos. 12 sistemas anatómicos, 600+ estructuras.
