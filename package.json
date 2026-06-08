@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.81",
+    "@ai-sdk/groq": "^3.0.39",
     "@ai-sdk/react": "^3.0.196",
     "@anthropic-ai/sdk": "^0.100.1",
     "@react-three/drei": "^10.7.7",
