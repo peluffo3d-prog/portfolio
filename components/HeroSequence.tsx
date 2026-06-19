@@ -4,6 +4,7 @@ import { useScroll, useMotionValueEvent } from "motion/react";
 
 const DESKTOP_FRAMES = 60;
 const MOBILE_FRAMES  = 28;
+const MOBILE_SCALE   = 0.92; // margen alrededor del átomo en mobile (object-fit: contain)
 
 type Device = "desktop" | "mobile";
 
@@ -22,6 +23,7 @@ export default function HeroSequence({
   const frameCountRef   = useRef(0);
   const currentIndexRef = useRef(0);
   const reducedMotionRef = useRef(false);
+  const coverRef        = useRef(true); // desktop = cover (llena), mobile = contain (entra entero)
 
   const [device, setDevice] = useState<Device | null>(null);
   const [ready, setReady]   = useState(false);
@@ -30,7 +32,11 @@ export default function HeroSequence({
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     setDevice(mq.matches ? "desktop" : "mobile");
-    const handler = (e: MediaQueryListEvent) => setDevice(e.matches ? "desktop" : "mobile");
+    coverRef.current = mq.matches;
+    const handler = (e: MediaQueryListEvent) => {
+      setDevice(e.matches ? "desktop" : "mobile");
+      coverRef.current = e.matches;
+    };
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
@@ -79,24 +85,35 @@ export default function HeroSequence({
       canvas.height = cssH * dpr;
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
 
-    // Recorte manual tipo object-fit: cover
     const canvasRatio = cssW / cssH;
     const imgRatio    = img.naturalWidth / img.naturalHeight;
-    let sx, sy, sw, sh;
-    if (imgRatio > canvasRatio) {
-      sh = img.naturalHeight;
-      sw = sh * canvasRatio;
-      sx = (img.naturalWidth - sw) / 2;
-      sy = 0;
+
+    if (coverRef.current) {
+      // object-fit: cover — recorta la fuente y llena el canvas (desktop)
+      let sx, sy, sw, sh;
+      if (imgRatio > canvasRatio) {
+        sh = img.naturalHeight;
+        sw = sh * canvasRatio;
+        sx = (img.naturalWidth - sw) / 2;
+        sy = 0;
+      } else {
+        sw = img.naturalWidth;
+        sh = sw / canvasRatio;
+        sx = 0;
+        sy = (img.naturalHeight - sh) / 2;
+      }
+      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cssW, cssH);
     } else {
-      sw = img.naturalWidth;
-      sh = sw / canvasRatio;
-      sx = 0;
-      sy = (img.naturalHeight - sh) / 2;
+      // object-fit: contain — el átomo entra entero, más chico y centrado (mobile)
+      const scale = Math.min(cssW / img.naturalWidth, cssH / img.naturalHeight) * MOBILE_SCALE;
+      const dw = img.naturalWidth * scale;
+      const dh = img.naturalHeight * scale;
+      const dx = (cssW - dw) / 2;
+      const dy = (cssH - dh) / 2;
+      ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, dx, dy, dw, dh);
     }
-    ctx.clearRect(0, 0, cssW, cssH);
-    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cssW, cssH);
   }
 
   const { scrollYProgress } = useScroll({
