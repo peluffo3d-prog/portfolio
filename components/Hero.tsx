@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, X } from "lucide-react";
+import HeroSequence from "./HeroSequence";
 
 function useCountUp(target: number, duration = 1600, startDelay = 600) {
   const [count, setCount] = useState(0);
@@ -60,8 +61,7 @@ const STATS = [
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [availMonth, setAvailMonth] = useState("junio 2026");
-  const [showVideo, setShowVideo] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Auto-actualiza cada vez que se carga la página
@@ -71,36 +71,14 @@ export default function Hero() {
     setAvailMonth(`${mes} ${año}`);
   }, []);
 
-  useEffect(() => {
-    // En mobile no se carga el video (ahorra datos): el fondo es el gradiente.
-    // En desktop+ sí, con fade-in para evitar el flash negro mientras descarga.
-    const mq = window.matchMedia("(min-width: 768px)");
-    setShowVideo(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setShowVideo(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
   return (
     <div
+      ref={heroRef}
       className="relative min-h-screen flex flex-col overflow-hidden"
       style={{ fontFamily: "'Inter', sans-serif", background: "linear-gradient(135deg, #e8e6e1 0%, #c9c7c2 100%)" }}
     >
-      {/* ── VIDEO BACKGROUND (solo desktop, fade-in al cargar) ── */}
-      {showVideo && (
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          onLoadedData={() => setVideoLoaded(true)}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ zIndex: 0, opacity: videoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
-        >
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260517_222138_3e3205be-3364-417b-a64a-bfe087acbec4.mp4" />
-        </video>
-      )}
+      {/* ── SECUENCIA DE IMÁGENES (scroll-scrub, desktop + mobile) ── */}
+      <HeroSequence containerRef={heroRef} />
 
       {/* Scrim: protege la legibilidad del texto negro sobre el video (zonas de texto arriba y abajo) */}
       <div
