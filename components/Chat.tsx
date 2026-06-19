@@ -118,8 +118,8 @@ export default function Chat() {
               initial={{ y: "110%" }}
               animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-semibold uppercase"
-              style={{ fontSize: "clamp(2.4rem, 7vw, 6rem)", lineHeight: 0.88, fontWeight: 600 }}
+              className="font-display font-semibold uppercase"
+              style={{ fontSize: "clamp(2.4rem, 7vw, 6rem)", lineHeight: 0.9, fontWeight: 600 }}
             >
               Preguntale<br />a la IA.
             </motion.h2>
@@ -161,7 +161,7 @@ export default function Chat() {
               PS
             </div>
             <div className="flex-1">
-              <p className="text-xs font-semibold tracking-wide">Asistente de PeluffoStudio</p>
+              <p className="text-xs font-semibold tracking-wide">Asistente de PelufoStudio</p>
               <div className="flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#22c55e" }} />
                 <span className="text-[9px] font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>En línea</span>

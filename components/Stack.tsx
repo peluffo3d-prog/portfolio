@@ -50,8 +50,8 @@ export default function Stack() {
           initial={{ y: "110%" }}
           animate={inView ? { y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-          className="font-semibold uppercase"
-          style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.88, fontWeight: 600 }}
+          className="font-display font-semibold uppercase"
+          style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.9, fontWeight: 600 }}
         >
           Capacidades.
         </motion.h2>

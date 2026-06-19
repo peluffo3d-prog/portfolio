@@ -6,10 +6,9 @@ import Services from "@/components/Services";
 import Chat from "@/components/Chat";
 
 const SOCIAL = [
-  { label: "GitHub",   href: "https://github.com/peluffo3d-prog" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/TODO"       },  // TODO: reemplazar
-  { label: "WhatsApp", href: "https://wa.me/TODO"                 },  // TODO: reemplazar
-  { label: "Mail",     href: "mailto:jaas.i.elel2@gmail.com"      },
+  { label: "GitHub", href: "https://github.com/peluffo3d-prog" },
+  { label: "Mail",   href: "mailto:jaas.i.elel2@gmail.com"      },
+  // LinkedIn y WhatsApp: agregar cuando Jasiel pase URL y número reales.
 ];
 
 export default function Home() {
@@ -30,7 +29,7 @@ export default function Home() {
           className="text-[9px] font-semibold tracking-widest uppercase"
           style={{ color: "rgba(255,255,255,0.22)" }}
         >
-          PeluffoStudio · Buenos Aires · {new Date().getFullYear()}
+          PelufoStudio · Buenos Aires · {new Date().getFullYear()}
         </span>
 
         <div className="flex items-center gap-6">

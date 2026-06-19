@@ -36,8 +36,8 @@ export default function Projects() {
               initial={{ y: "110%" }}
               animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
-              className="font-semibold uppercase"
-              style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.88, fontWeight: 600 }}
+              className="font-display font-semibold uppercase"
+              style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.9, fontWeight: 600 }}
             >
               Lo que<br />construimos.
             </motion.h2>
@@ -109,7 +109,7 @@ export default function Projects() {
 
             {/* Arrow — top right, visible on hover */}
             <div
-              className="absolute top-4 right-4 md:top-5 md:right-5 w-9 h-9 rounded-full border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-white group-hover:border-white"
+              className="absolute top-4 right-4 md:top-5 md:right-5 w-9 h-9 rounded-full border flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 group-hover:bg-white group-hover:border-white"
               style={{ borderColor: "rgba(255,255,255,0.3)" }}
             >
               <ArrowUpRight size={14} className="text-black" />
@@ -118,7 +118,7 @@ export default function Projects() {
             {/* Contenido inferior — siempre visible, se enriquece en hover */}
             <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
               {/* Tags — aparecen en hover */}
-              <div className="flex flex-wrap gap-2 mb-3 overflow-hidden h-0 group-hover:h-auto transition-all duration-300">
+              <div className="flex flex-wrap gap-2 mb-3 md:overflow-hidden md:h-0 md:group-hover:h-auto transition-all duration-300">
                 {project.tags.map(tag => (
                   <span
                     key={tag}
@@ -144,7 +144,7 @@ export default function Projects() {
 
               {/* Descripción — aparece en hover */}
               <p
-                className="mt-2 text-[11px] leading-relaxed font-medium tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-400 max-w-sm"
+                className="mt-2 text-[11px] leading-relaxed font-medium tracking-wide opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-400 max-w-sm"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
                 {project.description}

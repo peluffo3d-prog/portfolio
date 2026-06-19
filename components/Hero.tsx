@@ -60,6 +60,8 @@ const STATS = [
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [availMonth, setAvailMonth] = useState("junio 2026");
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     // Auto-actualiza cada vez que se carga la página
@@ -69,22 +71,46 @@ export default function Hero() {
     setAvailMonth(`${mes} ${año}`);
   }, []);
 
+  useEffect(() => {
+    // En mobile no se carga el video (ahorra datos): el fondo es el gradiente.
+    // En desktop+ sí, con fade-in para evitar el flash negro mientras descarga.
+    const mq = window.matchMedia("(min-width: 768px)");
+    setShowVideo(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setShowVideo(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   return (
     <div
       className="relative min-h-screen flex flex-col overflow-hidden"
-      style={{ fontFamily: "'Inter', sans-serif" }}
+      style={{ fontFamily: "'Inter', sans-serif", background: "linear-gradient(135deg, #e8e6e1 0%, #c9c7c2 100%)" }}
     >
-      {/* ── VIDEO BACKGROUND ── */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ zIndex: 0 }}
-      >
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260517_222138_3e3205be-3364-417b-a64a-bfe087acbec4.mp4" />
-      </video>
+      {/* ── VIDEO BACKGROUND (solo desktop, fade-in al cargar) ── */}
+      {showVideo && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          onLoadedData={() => setVideoLoaded(true)}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0, opacity: videoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+        >
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260517_222138_3e3205be-3364-417b-a64a-bfe087acbec4.mp4" />
+        </video>
+      )}
+
+      {/* Scrim: protege la legibilidad del texto negro sobre el video (zonas de texto arriba y abajo) */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 1,
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 24%, rgba(255,255,255,0) 56%, rgba(255,255,255,0.66) 100%)",
+        }}
+      />
 
       {/* ── CONTENT ── */}
       <div className="relative z-10 flex flex-col min-h-screen">
@@ -103,7 +129,7 @@ export default function Hero() {
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
             </div>
             <span className="hidden sm:block text-sm font-semibold tracking-widest uppercase text-black">
-              PeluffoStudio
+              PelufoStudio
             </span>
           </motion.div>
 
@@ -181,8 +207,8 @@ export default function Hero() {
                   initial={{ y: "110%" }}
                   animate={{ y: 0 }}
                   transition={{ delay: 0.4 + i * 0.14, duration: 0.7, ease: EASE }}
-                  className="font-semibold uppercase text-black text-right"
-                  style={{ fontSize: "clamp(2.2rem, 6.5vw, 6.5rem)", lineHeight: 0.9, fontWeight: 600 }}
+                  className="font-display font-semibold uppercase text-black text-right"
+                  style={{ fontSize: "clamp(2.2rem, 6.5vw, 6.5rem)", lineHeight: 0.92, fontWeight: 600 }}
                 >
                   {word}
                 </motion.div>
@@ -194,7 +220,7 @@ export default function Hero() {
           <div className="flex items-center justify-between gap-4">
             <motion.p
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
-              className="text-[9px] sm:text-xs font-semibold tracking-widest uppercase text-black max-w-[160px] sm:max-w-[220px] md:max-w-xs leading-relaxed"
+              className="text-[9px] sm:text-xs font-semibold tracking-widest uppercase text-black max-w-[210px] sm:max-w-[240px] md:max-w-xs leading-relaxed"
             >
               Jasiel & Javier /<br />Software & IA /<br />Buenos Aires
             </motion.p>

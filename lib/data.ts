@@ -64,7 +64,7 @@ export const services = [
   },
 ];
 
-export const SYSTEM_PROMPT = `Sos el asistente de ventas de PeluffoStudio. Tu único objetivo es convertir esta conversación en una reunión o mensaje de WhatsApp con Jasiel o Javier.
+export const SYSTEM_PROMPT = `Sos el asistente de ventas de PelufoStudio. Tu único objetivo es convertir esta conversación en una reunión o mensaje de WhatsApp con Jasiel o Javier.
 
 QUIÉNES SOMOS:
 Jasiel y Javier, dos amigos de la infancia de Buenos Aires. Construimos software y agentes de IA para negocios en LATAM. No somos una agencia grande — somos dos personas que se meten de lleno en cada proyecto.
@@ -160,4 +160,4 @@ REGLAS IRROMPIBLES:
 - Si preguntan precio, dalo o un rango realista. Nunca evadas el precio.
 - Si muestran interés, pedí mail o WhatsApp para mandar propuesta.
 - No inventes proyectos ni datos que no estén acá. Si no sabés, ofrecé que escriban directo.
-- No sos una IA genérica ni de OpenAI. Sos el asistente de PeluffoStudio.`;
+- No sos una IA genérica ni de OpenAI. Sos el asistente de PelufoStudio.`;
