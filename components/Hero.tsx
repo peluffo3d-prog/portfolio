@@ -4,28 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, ChevronDown, X } from "lucide-react";
 import HeroSequence from "./HeroSequence";
 
-function useCountUp(target: number, duration = 1600, startDelay = 600) {
-  const [count, setCount] = useState(0);
-  const started = useRef(false);
-  useEffect(() => {
-    if (started.current) return;
-    started.current = true;
-    const timer = setTimeout(() => {
-      const start = performance.now();
-      const tick = (now: number) => {
-        const progress = Math.min((now - start) / duration, 1);
-        // ease-out quart
-        const eased = 1 - Math.pow(1 - progress, 4);
-        setCount(Math.round(eased * target));
-        if (progress < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    }, startDelay);
-    return () => clearTimeout(timer);
-  }, [target, duration, startDelay]);
-  return count;
-}
-
 const ACCENT = "#5E0ED7";
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -45,18 +23,8 @@ const fadeUp = {
   }),
 };
 
-function StatNumber({ target, delay }: { target: number; delay: number }) {
-  const val = useCountUp(target, 1500, delay);
-  return <>{val}</>;
-}
-
-const NAV_LINKS      = ["Historia", "Proyectos", "Servicios", "Contacto"];
-const HEADING_WORDS  = ["Construimos", "Ideas."];
-const STATS = [
-  { num: "6",  label: "PROYECTOS\nENTREGADOS" },
-  { num: "2",  label: "AGENTES\nDE IA" },
-  { num: "3",  label: "CLIENTES\nACTIVOS" },
-];
+const NAV_LINKS  = ["Historia", "Proyectos", "Servicios", "Contacto"];
+const HERO_LINES = ["Potenciamos marcas", "para inspirar personas."];
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -163,70 +131,42 @@ export default function Hero() {
           </motion.button>
         </nav>
 
-        {/* ── STATS ROW ── */}
-        <div className="flex-1 flex items-center justify-end px-5 sm:px-8 md:px-12 pt-10 md:pt-0 pb-4 md:pb-0">
-          <div className="flex items-start gap-5 sm:gap-8 md:gap-10">
-            {STATS.map((stat, i) => (
-              <motion.div
-                key={stat.num}
-                variants={fadeUp} initial="hidden" animate="visible" custom={i + 2}
-                className="flex flex-col items-end text-right"
-              >
-                <div
-                  className="font-semibold text-black leading-none"
-                  style={{ fontSize: "clamp(1.2rem, 3.5vw, 2.8rem)", fontWeight: 600 }}
-                >
-                  <span style={{ fontSize: "0.5em", color: ACCENT }}>+</span>
-                  <StatNumber target={parseInt(stat.num)} delay={800 + i * 150} />
-                </div>
-                <div className="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-widest uppercase text-black whitespace-pre-line leading-tight mt-1">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {/* ── CONTENIDO: frase arriba / átomo al centro (bg) / CTA abajo ──
+             Mobile: frase top + CTA bottom (justify-between), centrado.
+             Desktop: frase y CTA agrupadas abajo a la derecha (editorial). */}
+        <div className="flex-1 flex flex-col justify-between md:justify-end px-5 sm:px-8 md:px-12 pt-10 md:pt-0 pb-20 md:pb-12">
 
-        {/* ── BOTTOM ── */}
-        <div className="px-5 sm:px-8 md:px-12 pb-7 md:pb-12">
-
-          {/* Heading — full width, tamaño controlado */}
-          <div className="mb-5 md:mb-8">
-            {HEADING_WORDS.map((word, i) => (
-              <div key={word} className="overflow-hidden">
-                <motion.div
+          {/* Frase hero */}
+          <div className="text-center md:text-right md:mb-8">
+            {HERO_LINES.map((line, i) => (
+              <div key={line} className="overflow-hidden">
+                <motion.h1
                   initial={{ y: "110%" }}
                   animate={{ y: 0 }}
-                  transition={{ delay: 0.4 + i * 0.14, duration: 0.7, ease: EASE }}
-                  className="font-display font-semibold uppercase text-black text-right"
-                  style={{ fontSize: "clamp(2.2rem, 6.5vw, 6.5rem)", lineHeight: 0.92, fontWeight: 600 }}
+                  transition={{ delay: 0.35 + i * 0.14, duration: 0.7, ease: EASE }}
+                  className="font-display font-semibold uppercase text-black"
+                  style={{ fontSize: "clamp(2rem, 6vw, 6rem)", lineHeight: 0.98, fontWeight: 600 }}
                 >
-                  {word}
-                </motion.div>
+                  {line}
+                </motion.h1>
               </div>
             ))}
           </div>
 
-          {/* Row: tagline + CTA — debajo del heading */}
-          <div className="flex items-center justify-between gap-4">
-            <motion.p
-              variants={fadeUp} initial="hidden" animate="visible" custom={5}
-              className="text-[9px] sm:text-xs font-semibold tracking-widest uppercase text-black max-w-[210px] sm:max-w-[240px] md:max-w-xs leading-relaxed"
-            >
-              Jasiel & Javier /<br />Software & IA /<br />Buenos Aires
-            </motion.p>
-
-            <motion.a
+          {/* CTA → chat IA */}
+          <motion.div
+            variants={fadeUp} initial="hidden" animate="visible" custom={5}
+            className="flex justify-center md:justify-end"
+          >
+            <a
               href="#contacto"
-              variants={fadeUp} initial="hidden" animate="visible" custom={6}
-              className="flex items-center gap-1.5 font-semibold tracking-widest uppercase whitespace-nowrap text-sm sm:text-lg md:text-2xl hover:opacity-70 transition-opacity"
+              className="group inline-flex items-center gap-2 font-semibold tracking-widest uppercase whitespace-nowrap text-base sm:text-xl md:text-2xl hover:opacity-70 transition-opacity"
               style={{ color: ACCENT }}
             >
               Trabajemos juntos
-              <ArrowUpRight size={16} className="sm:hidden" />
-              <ArrowUpRight size={20} className="hidden sm:block" />
-            </motion.a>
-          </div>
+              <ArrowUpRight size={20} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </motion.div>
         </div>
       </div>
 
