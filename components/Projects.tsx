@@ -1,5 +1,5 @@
 "use client";
-import { motion, useInView } from "motion/react";
+import { motion, useScroll, useTransform, useInView } from "motion/react";
 import { useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
@@ -9,22 +9,30 @@ const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const ACCENT = "#5E0ED7";
 
 export default function Projects() {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const trackRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
+
+  const { scrollYProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
+  const finalPercent = ((projects.length - 1) / projects.length) * 100;
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${finalPercent}%`]);
 
   return (
-    <section
+    <div
       id="proyectos"
-      ref={ref}
-      style={{ fontFamily: "'Inter', sans-serif", background: "#060606", color: "#fff" }}
-      className="px-5 sm:px-8 md:px-12 py-24 md:py-36"
+      ref={trackRef}
+      className="relative"
+      style={{ height: `${projects.length * 100}vh` }}
     >
-      {/* Header */}
-      <div className="flex items-end justify-between mb-12 md:mb-16">
-        <div>
+      <div
+        className="sticky top-0 h-screen overflow-hidden flex flex-col"
+        style={{ fontFamily: "'Inter', sans-serif", background: "#060606", color: "#fff" }}
+      >
+        {/* Header */}
+        <div ref={headerRef} className="px-5 sm:px-8 md:px-12 pt-20 md:pt-24 pb-6 md:pb-8 shrink-0">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
             className="text-[10px] font-semibold tracking-widest uppercase mb-4"
             style={{ color: ACCENT }}
@@ -34,125 +42,100 @@ export default function Projects() {
           <div className="overflow-hidden">
             <motion.h2
               initial={{ y: "110%" }}
-              animate={inView ? { y: 0 } : {}}
+              animate={headerInView ? { y: 0 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 }}
               className="font-display font-semibold uppercase"
-              style={{ fontSize: "clamp(2.4rem, 7vw, 6.5rem)", lineHeight: 0.9, fontWeight: 600 }}
+              style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)", lineHeight: 0.9, fontWeight: 600 }}
             >
-              Lo que<br />construimos.
+              Lo que construimos.
             </motion.h2>
           </div>
         </div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
-          className="hidden md:block text-xs font-semibold tracking-widest uppercase text-right"
-          style={{ color: "rgba(255,255,255,0.3)" }}
-        >
-          {projects.length} proyectos
-        </motion.p>
-      </div>
 
-      {/* Grid — 2 columnas en desktop, 1 en mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-        {projects.map((project, i) => (
-          <motion.a
-            key={project.title}
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 32 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.12 + i * 0.07 }}
-            className="group relative block overflow-hidden"
-            style={{
-              aspectRatio: i === 0 ? "16/10" : "4/3",
-              borderRadius: "4px",
-            }}
-          >
-            {/* Imagen de fondo */}
-            {project.image ? (
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                unoptimized={project.image.includes("thum.io")}
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            ) : (
-              <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #111 0%, #222 100%)" }} />
-            )}
-
-            {/* Overlay base — siempre presente para legibilidad */}
-            <div
-              className="absolute inset-0 transition-opacity duration-500"
-              style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 100%)" }}
-            />
-
-            {/* Overlay hover */}
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{ background: "rgba(0,0,0,0.45)" }}
-            />
-
-            {/* Número — top left */}
-            <div className="absolute top-4 left-5 md:top-5 md:left-6">
-              <span
-                className="text-[10px] font-semibold tracking-widest uppercase transition-opacity duration-300 group-hover:opacity-0"
-                style={{ color: ACCENT }}
+        {/* Galería horizontal pineada */}
+        <div className="flex-1 relative overflow-hidden">
+          <motion.div className="flex h-full" style={{ x, width: `${projects.length * 100}vw` }}>
+            {projects.map((project, i) => (
+              <a
+                key={project.title}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block shrink-0 w-screen h-full px-5 sm:px-8 md:px-12 pb-8"
               >
-                0{i + 1}
-              </span>
-            </div>
+                <div
+                  className="relative w-full h-full overflow-hidden"
+                  style={{ borderRadius: "4px" }}
+                >
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      unoptimized={project.image.includes("thum.io")}
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      sizes="100vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #111 0%, #222 100%)" }} />
+                  )}
 
-            {/* Arrow — top right, visible on hover */}
-            <div
-              className="absolute top-4 right-4 md:top-5 md:right-5 w-9 h-9 rounded-full border flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 group-hover:bg-white group-hover:border-white"
-              style={{ borderColor: "rgba(255,255,255,0.3)" }}
-            >
-              <ArrowUpRight size={14} className="text-black" />
-            </div>
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 100%)" }}
+                  />
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: "rgba(0,0,0,0.45)" }}
+                  />
 
-            {/* Contenido inferior — siempre visible, se enriquece en hover */}
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-              {/* Tags — aparecen en hover */}
-              <div className="flex flex-wrap gap-2 mb-3 md:overflow-hidden md:h-0 md:group-hover:h-auto transition-all duration-300">
-                {project.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="text-[9px] font-semibold tracking-widest uppercase px-2 py-1"
-                    style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", borderRadius: "2px" }}
+                  <div className="absolute top-5 left-5 md:top-6 md:left-6">
+                    <span
+                      className="text-[10px] font-semibold tracking-widest uppercase transition-opacity duration-300 group-hover:opacity-0"
+                      style={{ color: ACCENT }}
+                    >
+                      0{i + 1}
+                    </span>
+                  </div>
+
+                  <div
+                    className="absolute top-5 right-5 md:top-6 md:right-6 w-9 h-9 rounded-full border flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 group-hover:bg-white group-hover:border-white"
+                    style={{ borderColor: "rgba(255,255,255,0.3)" }}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                    <ArrowUpRight size={14} className="text-black" />
+                  </div>
 
-              <h3
-                className="font-semibold uppercase leading-none transition-transform duration-500 ease-out"
-                style={{
-                  fontSize: "clamp(1.2rem, 2.8vw, 2rem)",
-                  fontWeight: 700,
-                  color: "#fff",
-                  transform: "translateY(0)",
-                }}
-              >
-                {project.title}
-              </h3>
-
-              {/* Descripción — aparece en hover */}
-              <p
-                className="mt-2 text-[11px] leading-relaxed font-medium tracking-wide opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-400 max-w-sm"
-                style={{ color: "rgba(255,255,255,0.65)" }}
-              >
-                {project.description}
-              </p>
-            </div>
-          </motion.a>
-        ))}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {project.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="text-[9px] font-semibold tracking-widest uppercase px-2 py-1"
+                          style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", borderRadius: "2px" }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h3
+                      className="font-display font-semibold uppercase leading-none"
+                      style={{ fontSize: "clamp(1.6rem, 4.5vw, 3.4rem)", color: "#fff" }}
+                    >
+                      {project.title}
+                    </h3>
+                    <p
+                      className="mt-3 text-xs sm:text-sm leading-relaxed font-medium tracking-wide max-w-md"
+                      style={{ color: "rgba(255,255,255,0.65)" }}
+                    >
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </motion.div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

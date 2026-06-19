@@ -1,6 +1,8 @@
 "use client";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { useSectionScroll } from "@/lib/useSectionScroll";
+import StackVisual from "./visuals/StackVisual";
 
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const ACCENT = "#5E0ED7";
@@ -25,16 +27,18 @@ const STACK = [
 ];
 
 export default function Stack() {
-  const ref    = useRef(null);
+  const ref    = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { scrollYProgress } = useSectionScroll(ref);
 
   return (
     <section
       id="stack"
       ref={ref}
       style={{ fontFamily: "'Inter', sans-serif", background: "#060606", color: "#fff" }}
-      className="px-5 sm:px-8 md:px-12 py-24 md:py-32"
+      className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-32"
     >
+      <StackVisual progress={scrollYProgress} />
       <motion.p
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}

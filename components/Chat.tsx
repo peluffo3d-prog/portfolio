@@ -2,6 +2,8 @@
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import { useSectionScroll } from "@/lib/useSectionScroll";
+import ChatVisual from "./visuals/ChatVisual";
 
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const ACCENT = "#5E0ED7";
@@ -43,8 +45,9 @@ function renderMarkdown(text: string) {
 }
 
 export default function Chat() {
-  const ref    = useRef(null);
+  const ref    = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { scrollYProgress } = useSectionScroll(ref);
 
   const [messages, setMessages]   = useState<Message[]>([]);
   const [input, setInput]         = useState("");
@@ -96,8 +99,10 @@ export default function Chat() {
       id="contacto"
       ref={ref}
       style={{ fontFamily: "var(--font-sans), 'Inter', sans-serif", background: "#060606", color: "#fff" }}
-      className="px-5 sm:px-8 md:px-12 py-24 md:py-36"
+      className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-36"
     >
+      <ChatVisual progress={scrollYProgress} />
+
       {/* Header de sección */}
       <motion.p
         initial={{ opacity: 0, y: 16 }}

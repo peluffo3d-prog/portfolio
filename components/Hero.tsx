@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, X } from "lucide-react";
 import HeroSequence from "./HeroSequence";
 
 function useCountUp(target: number, duration = 1600, startDelay = 600) {
@@ -61,7 +61,20 @@ const STATS = [
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [availMonth, setAvailMonth] = useState("junio 2026");
+  const [scrolled, setScrolled] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Única invitación a bajar — desaparece apenas el usuario empieza a scrollear
+    const onScroll = () => {
+      if (window.scrollY > 30) {
+        setScrolled(true);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     // Auto-actualiza cada vez que se carga la página
@@ -216,6 +229,20 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* ── SCROLL HINT — única invitación a bajar, no indica cuánto falta ── */}
+      <motion.div
+        animate={{ opacity: scrolled ? 0 : 1 }}
+        transition={{ duration: 0.4 }}
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown size={20} className="text-black/40" />
+        </motion.div>
+      </motion.div>
 
       {/* ── MOBILE MENU OVERLAY ── */}
       <AnimatePresence>
