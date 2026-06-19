@@ -10,7 +10,7 @@ export default function AboutVisual({ progress }: { progress: MotionValue<number
 
   return (
     <div
-      className="absolute left-3 md:left-6 top-16 bottom-16 hidden md:block pointer-events-none"
+      className="absolute left-3 md:left-6 -top-12 -bottom-12 hidden md:block pointer-events-none"
       style={{ zIndex: -1 }}
     >
       <div className="relative h-full w-px" style={{ background: "rgba(94,14,215,0.15)" }}>

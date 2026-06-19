@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { services } from "@/lib/data";
 import { useSectionScroll } from "@/lib/useSectionScroll";
 import ServicesVisual from "./visuals/ServicesVisual";
+import SectionSeam from "./SectionSeam";
 
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const ACCENT = "#5E0ED7";
@@ -21,6 +22,7 @@ export default function Services() {
       style={{ fontFamily: "'Inter', sans-serif", background: "#fff", color: "#000" }}
       className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-36"
     >
+      <SectionSeam from="#060606" to="#fff" />
       <ServicesVisual progress={scrollYProgress} />
       {/* Label */}
       <motion.p

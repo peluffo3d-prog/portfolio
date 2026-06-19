@@ -8,7 +8,7 @@ export default function ServicesVisual({ progress }: { progress: MotionValue<num
 
   return (
     <div
-      className="absolute left-0 top-32 bottom-16 hidden md:block pointer-events-none"
+      className="absolute left-0 -top-12 -bottom-16 hidden md:block pointer-events-none"
       style={{ zIndex: -1 }}
     >
       <div className="relative h-full w-px" style={{ background: "rgba(0,0,0,0.06)" }}>

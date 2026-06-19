@@ -3,6 +3,7 @@ import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { useSectionScroll } from "@/lib/useSectionScroll";
 import AboutVisual from "./visuals/AboutVisual";
+import SectionSeam from "./SectionSeam";
 
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const ACCENT = "#5E0ED7";
@@ -38,6 +39,7 @@ export default function About() {
       style={{ fontFamily: "'Inter', sans-serif", background: "#fff", color: "#000" }}
       className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-36"
     >
+      <SectionSeam from="#c9c7c2" to="#fff" />
       <AboutVisual progress={scrollYProgress} />
       {/* Label */}
       <motion.p

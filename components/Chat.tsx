@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { useSectionScroll } from "@/lib/useSectionScroll";
 import ChatVisual from "./visuals/ChatVisual";
+import SectionSeam from "./SectionSeam";
 
 const EASE   = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const ACCENT = "#5E0ED7";
@@ -101,6 +102,7 @@ export default function Chat() {
       style={{ fontFamily: "var(--font-sans), 'Inter', sans-serif", background: "#060606", color: "#fff" }}
       className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-36"
     >
+      <SectionSeam from="#fff" to="#060606" />
       <ChatVisual progress={scrollYProgress} />
 
       {/* Header de sección */}
