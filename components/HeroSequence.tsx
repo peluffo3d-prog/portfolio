@@ -4,7 +4,8 @@ import { useScroll, useMotionValueEvent } from "motion/react";
 
 const DESKTOP_FRAMES = 60;
 const MOBILE_FRAMES  = 28;
-const MOBILE_SCALE   = 0.92; // margen alrededor del átomo en mobile (object-fit: contain)
+const MOBILE_SCALE   = 1.0;       // los frames mobile ya vienen recortados con margen
+const MOBILE_BG      = "#f5f5f5"; // color de fondo de los frames — se rellena el canvas para que no se vea recuadro
 
 type Device = "desktop" | "mobile";
 
@@ -106,7 +107,10 @@ export default function HeroSequence({
       }
       ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cssW, cssH);
     } else {
-      // object-fit: contain — el átomo entra entero, más chico y centrado (mobile)
+      // mobile: rellena todo el canvas con el color de fondo del frame (full-bleed, sin recuadro)
+      ctx.fillStyle = MOBILE_BG;
+      ctx.fillRect(0, 0, cssW, cssH);
+      // y dibuja el átomo entero (frames ya recortados en portrait), centrado
       const scale = Math.min(cssW / img.naturalWidth, cssH / img.naturalHeight) * MOBILE_SCALE;
       const dw = img.naturalWidth * scale;
       const dh = img.naturalHeight * scale;
