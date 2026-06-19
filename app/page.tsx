@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Stack from "@/components/Stack";
 import Projects from "@/components/Projects";
+import NicheDemos from "@/components/NicheDemos";
 import Services from "@/components/Services";
 import Chat from "@/components/Chat";
 
@@ -18,11 +19,12 @@ export default function Home() {
       <About />
       <Stack />
       <Projects />
+      <NicheDemos />
       <Services />
       <Chat />
 
       <footer
-        style={{ fontFamily: "'Inter', sans-serif", background: "#060606", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        style={{ background: "#060606", borderTop: "1px solid rgba(255,255,255,0.08)" }}
         className="px-5 sm:px-8 md:px-12 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
       >
         <span

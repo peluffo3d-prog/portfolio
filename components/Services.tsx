@@ -19,7 +19,7 @@ export default function Services() {
     <section
       id="servicios"
       ref={ref}
-      style={{ fontFamily: "'Inter', sans-serif", background: "#fff", color: "#000" }}
+      style={{ background: "#fff", color: "#000" }}
       className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-36"
     >
       <SectionSeam from="#060606" to="#fff" />

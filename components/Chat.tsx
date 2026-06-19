@@ -99,7 +99,7 @@ export default function Chat() {
     <section
       id="contacto"
       ref={ref}
-      style={{ fontFamily: "var(--font-sans), 'Inter', sans-serif", background: "#060606", color: "#fff" }}
+      style={{ background: "#060606", color: "#fff" }}
       className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-36"
     >
       <SectionSeam from="#fff" to="#060606" />

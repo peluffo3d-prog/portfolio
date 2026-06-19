@@ -1,4 +1,12 @@
-export const projects = [
+export type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  link: string;
+  image: string;
+};
+
+export const projects: Project[] = [
   {
     title: "AtlasLibre",
     description: "Atlas anatómico 3D interactivo y gratuito para estudiantes de medicina en LATAM. +1.000 usuarios. Netter cuesta USD 100 — AtlasLibre cuesta $0.",

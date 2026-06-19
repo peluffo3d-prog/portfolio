@@ -23,7 +23,7 @@ const fadeUp = {
   }),
 };
 
-const NAV_LINKS  = ["Historia", "Proyectos", "Servicios", "Contacto"];
+const NAV_LINKS  = ["Historia", "Proyectos", "Demos", "Servicios", "Contacto"];
 const HERO_LINES = ["Potenciamos marcas", "para inspirar personas."];
 
 export default function Hero() {
@@ -56,7 +56,7 @@ export default function Hero() {
     <div
       ref={heroRef}
       className="relative min-h-screen flex flex-col overflow-hidden"
-      style={{ fontFamily: "'Inter', sans-serif", background: "linear-gradient(135deg, #e8e6e1 0%, #c9c7c2 100%)" }}
+      style={{ background: "linear-gradient(135deg, #e8e6e1 0%, #c9c7c2 100%)" }}
     >
       {/* ── SECUENCIA DE IMÁGENES (scroll-scrub, desktop + mobile) ── */}
       <HeroSequence containerRef={heroRef} />

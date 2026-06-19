@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Inter ahora se carga de verdad vía <link> en el layout */
-body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+/* Space Grotesk se carga vía <link> en el layout */
+body { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
 
 /* Sections below hero */
 :root {

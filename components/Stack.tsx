@@ -36,7 +36,7 @@ export default function Stack() {
     <section
       id="stack"
       ref={ref}
-      style={{ fontFamily: "'Inter', sans-serif", background: "#060606", color: "#fff" }}
+      style={{ background: "#060606", color: "#fff" }}
       className="relative z-0 px-5 sm:px-8 md:px-12 py-24 md:py-32"
     >
       <SectionSeam from="#fff" to="#060606" />
