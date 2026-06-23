@@ -44,10 +44,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #111 0%, #222 100%)" }} />
         )}
 
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }}
-        />
+        {!is3D && (
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }}
+          />
+        )}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{ background: "rgba(0,0,0,0.45)", pointerEvents: "none" }}
@@ -69,31 +71,42 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <ArrowUpRight size={14} className="text-black" />
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-          <div className="flex flex-wrap gap-2 mb-3">
-            {project.tags.map(tag => (
-              <span
-                key={tag}
-                className="text-[9px] font-semibold tracking-widest uppercase px-2 py-1"
-                style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", borderRadius: "2px" }}
-              >
-                {tag}
-              </span>
-            ))}
+        {is3D ? (
+          <div className="absolute bottom-5 left-5 md:bottom-6 md:left-6">
+            <p
+              className="text-[10px] font-semibold tracking-widest uppercase"
+              style={{ color: "rgba(255,255,255,0.55)" }}
+            >
+              {project.title} — modelo 3D real
+            </p>
           </div>
-          <h3
-            className="font-display font-semibold uppercase leading-none"
-            style={{ fontSize: "clamp(1.6rem, 4.5vw, 3.4rem)", color: "#fff" }}
-          >
-            {project.title}
-          </h3>
-          <p
-            className="mt-3 text-xs sm:text-sm leading-relaxed font-medium tracking-wide max-w-md"
-            style={{ color: "rgba(255,255,255,0.65)" }}
-          >
-            {project.description}
-          </p>
-        </div>
+        ) : (
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+            <div className="flex flex-wrap gap-2 mb-3">
+              {project.tags.map(tag => (
+                <span
+                  key={tag}
+                  className="text-[9px] font-semibold tracking-widest uppercase px-2 py-1"
+                  style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", borderRadius: "2px" }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h3
+              className="font-display font-semibold uppercase leading-none"
+              style={{ fontSize: "clamp(1.6rem, 4.5vw, 3.4rem)", color: "#fff" }}
+            >
+              {project.title}
+            </h3>
+            <p
+              className="mt-3 text-xs sm:text-sm leading-relaxed font-medium tracking-wide max-w-md"
+              style={{ color: "rgba(255,255,255,0.65)" }}
+            >
+              {project.description}
+            </p>
+          </div>
+        )}
       </div>
     </a>
   );

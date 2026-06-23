@@ -145,7 +145,7 @@ export default function Hero() {
                   animate={{ y: 0 }}
                   transition={{ delay: 0.35 + i * 0.14, duration: 0.7, ease: EASE }}
                   className="font-display font-semibold uppercase text-black"
-                  style={{ fontSize: "clamp(2rem, 6vw, 6rem)", lineHeight: 0.98, fontWeight: 600 }}
+                  style={{ fontSize: "clamp(1.75rem, 4vw, 4rem)", lineHeight: 0.98, fontWeight: 600 }}
                 >
                   {line}
                 </motion.h1>

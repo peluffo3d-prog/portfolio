@@ -165,10 +165,10 @@ export default function Chat() {
           {/* Barra superior del chat */}
           <div className="flex items-center gap-3 px-5 py-4 border-b" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
             <div className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold" style={{ background: ACCENT, color: "#fff" }}>
-              PS
+              V
             </div>
             <div className="flex-1">
-              <p className="text-xs font-semibold tracking-wide">Asistente de PelufoStudio</p>
+              <p className="text-xs font-semibold tracking-wide">Valentina · IA de PelufoStudio</p>
               <div className="flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#22c55e" }} />
                 <span className="text-[9px] font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>En línea</span>
@@ -181,11 +181,11 @@ export default function Chat() {
             {/* Mensaje de bienvenida */}
             {messages.length === 0 && (
               <div className="flex gap-3 items-start">
-                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0" style={{ background: ACCENT, color: "#fff" }}>PS</div>
+                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0" style={{ background: ACCENT, color: "#fff" }}>V</div>
                 <div className="rounded-2xl rounded-tl-sm px-4 py-3 max-w-[80%]" style={{ background: "rgba(255,255,255,0.06)" }}>
                   <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>
-                    ¡Hola! Somos Jasiel y Javier. Preguntame lo que quieras sobre nuestros proyectos,
-                    precios o cómo podríamos ayudar a tu negocio. 👋
+                    ¡Hola! Soy Valentina, la IA de PelufoStudio. Preguntame lo que quieras sobre nuestros
+                    proyectos, precios o cómo podríamos ayudar a tu negocio. 👋
                   </p>
                 </div>
               </div>
@@ -205,7 +205,7 @@ export default function Chat() {
                       background: m.role === "user" ? "rgba(255,255,255,0.1)" : ACCENT,
                       color:      m.role === "user" ? "rgba(255,255,255,0.7)" : "#fff",
                     }}>
-                    {m.role === "user" ? "Vos" : "PS"}
+                    {m.role === "user" ? "Vos" : "V"}
                   </div>
                   <div
                     className={`px-4 py-3 max-w-[80%] text-sm leading-relaxed space-y-1.5 ${m.role === "user" ? "rounded-2xl rounded-tr-sm" : "rounded-2xl rounded-tl-sm"}`}
